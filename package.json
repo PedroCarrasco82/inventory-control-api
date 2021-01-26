@@ -1,0 +1,8 @@
+{
+  "name": "inventory-control-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/PedroCarrasco82/inventory-control-api.git",
+  "author": "PedroCarrasco82 <contatopedrocarrasco@gmail.com>",
+  "license": "MIT"
+}
