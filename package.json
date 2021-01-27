@@ -9,7 +9,11 @@
     "express": "^4.17.1"
   },
   "scripts": {
-    "dev": "node index.js",
-    "start": "node index.js"
+    "dev": "node src/index.js",
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "husky": "^4.3.8"
   }
 }
