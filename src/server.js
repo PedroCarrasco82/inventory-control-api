@@ -1,12 +1,10 @@
 'use strict'
-
-const express = require('express')
-const app = express()
+const app = require('./app')
 
 const PORT = process.env.PORT || 3333
 
-app.get('/', (req, res) => {
-    return res.status(200).send('Hello World')
+app.get('/', (req,res) => {
+    return res.send('Hello World!')
 })
 
 app.listen(PORT, () => {
