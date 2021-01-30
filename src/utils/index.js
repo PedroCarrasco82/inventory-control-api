@@ -7,6 +7,11 @@ module.exports = {
     },
 
     cpfValidation(strCpf) {
+
+        if(/[A-Z a-z]/g.test(strCpf)){
+            return false
+        }
+
         const splitedCpf = strCpf
             .toString()
             .replace(/([^\d])+/gim,'')
@@ -47,6 +52,10 @@ module.exports = {
     },
 
     cnpjValidation(strCnpj) {
+        if(/[A-Z a-z]/g.test(strCnpj)){
+            return false
+        }
+
         const splitedCnpj = strCnpj
             .toString()
             .replace(/([^\d])+/gim,'')
@@ -106,6 +115,14 @@ module.exports = {
             return false
         }
 
+        return true
+    },
+
+    telephoneNumberValidation(telephoneNumber){
+        if(/[A-Z a-z]/g.test(telephoneNumber)){
+            return false
+        }
+        
         return true
     }
 }

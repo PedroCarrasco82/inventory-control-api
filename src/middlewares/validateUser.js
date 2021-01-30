@@ -1,6 +1,6 @@
 'use strict'
 
-const { emailValidation, cpfValidation } = require('../utils/index')
+const { emailValidation, cpfValidation,cnpjValidation, telephoneNumberValidation } = require('../utils/index')
 const { userType } = require('../enums')
 
 module.exports = (req, res, next) => {
@@ -11,7 +11,9 @@ module.exports = (req, res, next) => {
         birthdayDate, 
         passsword, 
         telephoneNumber,
-        userCEP, 
+        dialPhoneCode,
+        userCEP,
+        country, 
         companyName, 
         trandingName, 
         foudantionDate,
@@ -43,7 +45,13 @@ module.exports = (req, res, next) => {
         req.userType = userType.PERSON  
     }
 
+    const telephoneIsValid = telephoneNumberValidation(telephoneNumber)
 
+    if(!telephoneIsValid){
+        return res.status(400).json({
+            message: 'The provided telephone Number is wrong, please, check againt this field'
+        })
+    }
 
     next()
 }
