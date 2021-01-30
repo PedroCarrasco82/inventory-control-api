@@ -1,3 +1,5 @@
+'use strict'
+
 const {emailValidation, cpfValidation, cnpjValidation} = require('../../src/utils/index')
 
 describe('Utils', () => {
