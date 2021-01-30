@@ -1,3 +1,5 @@
+'use strict'
+
 const validateUser = require('./validateUser')
 
 module.exports = {
