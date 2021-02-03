@@ -15,10 +15,9 @@ module.exports = (req, res, next) => {
         cpfCnpj,
         userAdress, 
         birthdayDate, 
-        passsword, 
+        password, 
         telephoneNumber,
         userCEP,
-        country, 
         companyName, 
         trandingName, 
         foudantionDate,
@@ -69,6 +68,18 @@ module.exports = (req, res, next) => {
     if(!userCEPIsValid) {
         return res.status(400).json({
             message: 'The provided user CEP is wrong, please, check againt this field'
+        })
+    }
+
+    if(!password){
+        return res.status(400).json({
+            message: "No password provided"
+        })
+    }
+
+    if(password.length < 6){
+        return res.status(400).json({
+            message: "Invalid password. The password must be at least 6 characters"
         })
     }
 
