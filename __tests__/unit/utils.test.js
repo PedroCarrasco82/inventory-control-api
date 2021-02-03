@@ -1,6 +1,11 @@
 'use strict'
 
-const {emailValidation, cpfValidation, cnpjValidation} = require('../../src/utils/index')
+const {
+    emailValidation, 
+    cpfValidation, 
+    cnpjValidation,
+    CEPValidation
+} = require('../../src/utils/index')
 
 describe('Utils', () => {
     it('Ensure emailValidation function will return false when provided email is wrong', () => {
@@ -25,5 +30,13 @@ describe('Utils', () => {
 
     it('Ensure cnpjValidation function will return true when provided cnpj is correct', () => {
         expect(cnpjValidation('67.548.121/0001-43')).toBe(true)
+    })
+
+    it('Ensure CEPValidation function will return false when provided CEP is wrong', () => {
+        expect(CEPValidation('2743694553456345')).toBe(true)
+    })
+
+    it('Ensure CEPValidation function will return true when provided CEP is correct', () => {
+        expect(CEPValidation('79084-081')).toBe(true)
     })
 })
