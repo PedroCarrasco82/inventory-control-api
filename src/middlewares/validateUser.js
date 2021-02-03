@@ -1,15 +1,15 @@
 'use strict'
 
 const { 
-    emailValidation, 
-    cpfValidation,
-    cnpjValidation, 
-    telephoneNumberValidation,
-    CEPValidation 
-} = require('../utils/index')
+    validateEmail, 
+    validateCPF,
+    validateCNPJ, 
+    validateTelephoneNumber,
+    validateCEP 
+} = require('../utils/validations/index')
 const { userType } = require('../enums')
 
-module.exports = async (req, res, next) => {
+module.exports = (req, res, next) => {
     const { 
         email, 
         cpfCnpj,
@@ -27,14 +27,14 @@ module.exports = async (req, res, next) => {
         companyCEP
     } = req.body;
 
-    if(!emailValidation(email)){
+    if(!validateEmail(email)){
         return res.status(400).json({
             message: 'The provided email is wrong, please, check again this field'
         })
     }
 
-    const isCpf = cpfValidation(cpfCnpj)
-    const isCnpj = cnpjValidation(cpfCnpj)
+    const isCpf = validateCPF(cpfCnpj)
+    const isCnpj = validateCNPJ(cpfCnpj)
 
     if(!isCpf && !isCnpj){
         return res.status(400).json({
@@ -50,7 +50,7 @@ module.exports = async (req, res, next) => {
         req.userType = userType.PERSON  
     }
 
-    const telephoneIsValid = telephoneNumberValidation(telephoneNumber)
+    const telephoneIsValid = validateTelephoneNumber(telephoneNumber)
 
     if(!telephoneIsValid){
         return res.status(400).json({
@@ -58,14 +58,14 @@ module.exports = async (req, res, next) => {
         })
     }
 
-    const companyCEPIsValid = CEPValidation(companyCEP)
-    if(!companyCEPIsValid) {
+    const companyCEPIsValid = validateCEP(companyCEP)
+    if(companyCEP && !companyCEPIsValid) {
         return res.status(400).json({
             message: 'The provided company CEP is wrong, please, check againt this field'
         })
     }
 
-    const userCEPIsValid = CEPValidation(userCEP)
+    const userCEPIsValid = validateCEP(userCEP)
     if(!userCEPIsValid) {
         return res.status(400).json({
             message: 'The provided user CEP is wrong, please, check againt this field'
