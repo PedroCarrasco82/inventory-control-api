@@ -1,5 +1,7 @@
 'use strict'
 
+const { default: axios } = require("axios")
+
 module.exports = {
     emailValidation(email) {
         const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -119,10 +121,25 @@ module.exports = {
     },
 
     telephoneNumberValidation(telephoneNumber){
-        if(/[A-Z a-z]/g.test(telephoneNumber)){
+        const telephoneNumberNormalized = telephoneNumber
+        .toString()
+        .replace(/([^\d])+/gim,'')
+        .trim()
+        .replace(' ','')
+        .split('')
+
+        if(telephoneNumberNormalized.length != 11) {
+            return false
+        }
+
+        const ddd = telephoneNumberNormalized.slice(0, 2).join('')
+
+        const BrazilDDDsData = require('../data/BrazilDDDsData.json')
+
+        if(!BrazilDDDsData.estadoPorDdd[ddd]){
             return false
         }
         
         return true
-    }
+    },
 }

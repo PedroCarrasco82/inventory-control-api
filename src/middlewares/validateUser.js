@@ -1,9 +1,15 @@
 'use strict'
 
-const { emailValidation, cpfValidation,cnpjValidation, telephoneNumberValidation } = require('../utils/index')
+const { 
+    emailValidation, 
+    cpfValidation,
+    cnpjValidation, 
+    telephoneNumberValidation,
+    CEPValidation 
+} = require('../utils/index')
 const { userType } = require('../enums')
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
     const { 
         email, 
         cpfCnpj,
@@ -11,7 +17,6 @@ module.exports = (req, res, next) => {
         birthdayDate, 
         passsword, 
         telephoneNumber,
-        dialPhoneCode,
         userCEP,
         country, 
         companyName, 
