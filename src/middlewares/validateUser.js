@@ -58,5 +58,19 @@ module.exports = async (req, res, next) => {
         })
     }
 
+    const companyCEPIsValid = CEPValidation(companyCEP)
+    if(!companyCEPIsValid) {
+        return res.status(400).json({
+            message: 'The provided company CEP is wrong, please, check againt this field'
+        })
+    }
+
+    const userCEPIsValid = CEPValidation(userCEP)
+    if(!userCEPIsValid) {
+        return res.status(400).json({
+            message: 'The provided user CEP is wrong, please, check againt this field'
+        })
+    }
+
     next()
 }
