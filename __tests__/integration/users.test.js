@@ -8,7 +8,8 @@ const createUserMock = {
     cpfCnpj: '526.597.020-71',
     telephoneNumber: '(31)91923-2328',
     companyCEP: '59070-410',
-    userCEP: '59122-042'
+    userCEP: '59122-042',
+    password: 'p3dr1nh0m1lgr4u'
 }
 
 describe('Users route', () => {
@@ -38,7 +39,7 @@ describe('Users route', () => {
 
     it('Ensure return status 400 if invalid telephone number is provided', async () => {
         const body = { ...createUserMock }
-        body.telephoneNumber = '213as444'
+        body.telephoneNumber = '(01)91923-2328'
         const response = await request(app).post('/users/signup').send(body)
 
         expect(response.status).toBe(400)
@@ -55,6 +56,14 @@ describe('Users route', () => {
     it('Ensure return status 400 if invalid userCEP is provided', async () => {
         const body = { ...createUserMock }
         body.userCEP = '654456456576547'
+        const response = await request(app).post('/users/signup').send(body)
+        
+        expect(response.status).toBe(400)
+    })
+
+    it('Ensure return status 400 if invalid password is provided', async () => {
+        const body = { ...createUserMock }
+        body.password = '123'
         const response = await request(app).post('/users/signup').send(body)
         
         expect(response.status).toBe(400)
