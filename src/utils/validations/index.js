@@ -5,11 +5,13 @@ const validateCNPJ = require('./validateCNPJ')
 const validateCPF = require('./validateCPF')
 const validateEmail = require('./validateEmail')
 const validateTelephoneNumber = require('./validateTelephoneNumber')
+const validateBirthdayDate = require('./validateBirthdayDate')
 
 module.exports = {
     validateCEP,
     validateCNPJ,
     validateCPF,
     validateEmail,
-    validateTelephoneNumber
+    validateTelephoneNumber,
+    validateBirthdayDate
 }
