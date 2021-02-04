@@ -5,7 +5,8 @@ const {
     validateCPF,
     validateCNPJ, 
     validateTelephoneNumber,
-    validateCEP 
+    validateCEP,
+    validateBirthdayDate
 } = require('../utils/validations/index')
 const { userType } = require('../enums')
 
@@ -37,7 +38,7 @@ module.exports = (req, res, next) => {
 
     if(!isCpf && !isCnpj){
         return res.status(400).json({
-            message: 'The provided CPF/CNPJ is wrong, please, check againt this field'
+            message: 'The provided CPF/CNPJ is wrong, please, check again this field'
         })
     }
 
@@ -53,21 +54,21 @@ module.exports = (req, res, next) => {
 
     if(!telephoneIsValid){
         return res.status(400).json({
-            message: 'The provided telephone Number is wrong, please, check againt this field'
+            message: 'The provided telephone Number is wrong, please, check again this field'
         })
     }
 
     const companyCEPIsValid = validateCEP(companyCEP)
     if(companyCEP && !companyCEPIsValid) {
         return res.status(400).json({
-            message: 'The provided company CEP is wrong, please, check againt this field'
+            message: 'The provided company CEP is wrong, please, check again this field'
         })
     }
 
     const userCEPIsValid = validateCEP(userCEP)
     if(!userCEPIsValid) {
         return res.status(400).json({
-            message: 'The provided user CEP is wrong, please, check againt this field'
+            message: 'The provided user CEP is wrong, please, check again this field'
         })
     }
 
@@ -80,6 +81,13 @@ module.exports = (req, res, next) => {
     if(password.length < 6){
         return res.status(400).json({
             message: "Invalid password. The password must be at least 6 characters"
+        })
+    }
+
+    const userBirthdayDateIsValid = validateBirthdayDate(birthdayDate)
+    if(!userBirthdayDateIsValid) {
+        return res.status(400).json({
+            message: "Invalid birthday date, please, check again this field"
         })
     }
 
