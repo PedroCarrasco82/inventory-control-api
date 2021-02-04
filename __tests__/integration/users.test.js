@@ -9,7 +9,8 @@ const createUserMock = {
     telephoneNumber: '(31)91923-2328',
     companyCEP: '59070-410',
     userCEP: '59122-042',
-    password: 'p3dr1nh0m1lgr4u'
+    password: 'p3dr1nh0m1lgr4u',
+    birthdayDate: '2001-01-12'
 }
 
 describe('Users route', () => {
@@ -64,6 +65,14 @@ describe('Users route', () => {
     it('Ensure return status 400 if invalid password is provided', async () => {
         const body = { ...createUserMock }
         body.password = '123'
+        const response = await request(app).post('/users/signup').send(body)
+        
+        expect(response.status).toBe(400)
+    })
+
+    it('Ensure return status 400 if invalid birthday date is provided', async () => {
+        const body = { ...createUserMock }
+        body.birthdayDate = '20013-01-12'
         const response = await request(app).post('/users/signup').send(body)
         
         expect(response.status).toBe(400)
